@@ -1,17 +1,3 @@
-"""Unrolled Compressed Sensing (2D).
-
-This file contains an implementation of the Unrolled Compressed Sensing
-framework by CM Sandino, JY Cheng, et al. See paper below for more details.
-
-It is also based heavily on the codebase below:
-
-https://github.com/MRSRL/dl-cs
-
-Implementation is based on:
-    CM Sandino, JY Cheng, et al. "Compressed Sensing: From Research to
-    Clinical Practice with Deep Neural Networks" IEEE Signal Processing
-    Magazine, 2020.
-"""
 import torch
 import torchvision.utils as tv_utils
 from torch import nn
@@ -264,12 +250,11 @@ class DGLUnrolledRep(nn.Module):
             #len(self.resnets)
             for i in range(num_inf_steps):
                 #to do: make this for multiprocessing only
-                #device = self.resnets[stage].model.conv5.net[1].weight.device
-                #device = self.device
-                #image = image.to(device)
-                #zf_image = zf_image.to(device)
-                #A.maps = A.maps.to(device)
-                #A.weights = A.weights.to(device)
+                device = self.device
+                image = image.to(device)
+                zf_image = zf_image.to(device)
+                A.maps = A.maps.to(device)
+                A.weights = A.weights.to(device)
                 image = self.forward(image, i, A, cg_solve, zf_image, dims, num_emaps, num_inf_steps, upto=False)
             return image
         resnet = self.resnets[stage]

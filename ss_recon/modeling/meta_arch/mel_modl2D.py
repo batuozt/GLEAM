@@ -1,17 +1,3 @@
-"""Unrolled Compressed Sensing (2D).
-
-This file contains an implementation of the Unrolled Compressed Sensing
-framework by CM Sandino, JY Cheng, et al. See paper below for more details.
-
-It is also based heavily on the codebase below:
-
-https://github.com/MRSRL/dl-cs
-
-Implementation is based on:
-    CM Sandino, JY Cheng, et al. "Compressed Sensing: From Research to
-    Clinical Practice with Deep Neural Networks" IEEE Signal Processing
-    Magazine, 2020.
-"""
 import torch
 import torchvision.utils as tv_utils
 from torch import nn
