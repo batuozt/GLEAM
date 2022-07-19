@@ -1,0 +1,68 @@
+MODEL:
+  META_ARCHITECTURE: "DGLGeneralizedUnrolledCNN"
+  TRAIN_MODE: "DGL"
+  NUM_GREEDY_BLOCKS: 3
+  UNROLLED:
+    NUM_UNROLLED_STEPS: 24 
+    NUM_INF_STEPS: 24 
+    NUM_RESBLOCKS: 2
+    NUM_FEATURES: 100
+    NUM_EMAPS: 1
+    DROPOUT: 0.
+    CONV_BLOCK:
+      ACTIVATION: "relu"
+      NORM: "none"
+      ORDER: ("act", "conv")
+  RECON_LOSS:
+    NAME: "l1"
+    RENORMALIZE_DATA: False
+DATASETS:
+  TRAIN: ("fastMRI_brain_multicoil_mini_v0.0.1_val",)
+  VAL: ("fastMRI_brain_multicoil_mini_v0.0.1_val",)
+  TEST: ("fastMRI_brain_multicoil_mini_v0.0.1_test",)
+AUG_TRAIN:
+  UNDERSAMPLE:
+    NAME: "RandomMaskFunc1D"
+    ACCELERATIONS: (8,)
+    CALIBRATION_SIZE: 0
+    CENTER_FRACTIONS: (0.04,)
+AUG_TEST:
+  UNDERSAMPLE:
+    ACCELERATIONS: (8,)
+DATALOADER:
+  NUM_WORKERS: 8
+  DATA_KEYS: (("target", "espirit-cf=4/target"), ("maps", "espirit-cf=4/maps"))
+  FILTER:
+    BY: (("acquisition", "AXT2"), ("systemFieldStrength_T", 2.8936))
+  SAMPLER_TRAIN: "GroupSampler"
+  GROUP_SAMPLER:
+    BATCH_BY: ("receiverChannels", "inplane_shape")
+    AS_BATCH_SAMPLER: True
+  SUBSAMPLE_TRAIN:
+    NUM_TOTAL: 54
+    NUM_VAL: 50
+SOLVER:
+  OPTIMIZER: "Adam"
+  LR_SCHEDULER_NAME: ""
+  TRAIN_BATCH_SIZE: 2 #GRAD_ACCUM_ITERS: 2
+  TEST_BATCH_SIZE: 4
+  MAX_ITER: 80000
+  GAMMA: 1.0 # do not decrease learning rate.
+  STEPS: ()  # ensures learning rate does not decay
+  BASE_LR: 1e-4
+  BIAS_LR_FACTOR: 1.0
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  CHECKPOINT_PERIOD: -1
+DESCRIPTION:
+  BRIEF: brief description for wandb
+  EXP_NAME: exp_name/for/wandb
+  PROJECT_NAME: project_name
+  TAGS: ("tag1","tag2")
+TEST:
+  EVAL_PERIOD: -1
+VIS_PERIOD: 400
+TIME_SCALE: "iter"
+OUTPUT_DIR: "your_result_directory"  # template should not have an output directory
+SEED: 1000
+VERSION: 1

@@ -1,0 +1,61 @@
+MODEL:
+  META_ARCHITECTURE: "Modl2DUnrolledCNN"
+  MODL:
+    LAMBDA: 4.0
+    CG: 10
+  UNROLLED:
+    NUM_UNROLLED_STEPS: 8
+    NUM_RESBLOCKS: 1
+    NUM_INF_STEPS: 8
+    NUM_FEATURES: 70
+    NUM_EMAPS: 1
+    DROPOUT: 0.
+    CONV_BLOCK:
+      ACTIVATION: "relu"
+      NORM: "none"
+      ORDER: ("act", "conv")
+  RECON_LOSS:
+    NAME: "l1"
+    RENORMALIZE_DATA: False
+AUG_TRAIN:
+  UNDERSAMPLE:
+    ACCELERATIONS: (4,)
+AUG_TEST:
+  UNDERSAMPLE:
+    ACCELERATIONS: (4,)
+DATASETS:
+  TRAIN: ("mridata_knee_2019_train",)
+  VAL: ("mridata_knee_2019_val",)
+  TEST: ("mridata_knee_2019_test",)
+DATALOADER:
+  SUBSAMPLE_TRAIN:
+    # change NUM_TOTAL to control how many scans should be included for training. 
+    # `-1` -> all scans will be included
+    NUM_TOTAL: -1
+    SEED: 1000
+  NUM_WORKERS: 8
+SOLVER:
+  OPTIMIZER: "Adam"
+  LR_SCHEDULER_NAME: ""
+  TRAIN_BATCH_SIZE: 4
+  TEST_BATCH_SIZE: 6
+  MAX_ITER: 50000
+  GAMMA: 1.0 # do not decrease learning rate.
+  STEPS: ()  # ensures learning rate does not decay
+  BASE_LR: 1e-4
+  BIAS_LR_FACTOR: 1.0
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  CHECKPOINT_PERIOD: -1
+DESCRIPTION:
+  BRIEF: brief description for wandb
+  EXP_NAME: exp_name/for/wandb
+  PROJECT_NAME: project_name
+  TAGS: ("tag1","tag2")
+TEST:
+  EVAL_PERIOD: -1
+VIS_PERIOD: 400
+TIME_SCALE: "iter"
+OUTPUT_DIR: "your_result_directory"  # template should not have an output directory
+SEED: 1000
+VERSION: 1
