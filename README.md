@@ -60,19 +60,19 @@ python tools/eval_net.py --config-file configs/tests/basic.yaml --metric psnr
 python tools/eval_net.py --config-file configs/tests/basic.yaml MODEL.WEIGHTS path/to/weights 
 ```
 
-Example config files for different experiments from the paper are in [configs/GLEAM-configs](https://github.com/batuozt/GLEAM/configs/GLEAM-configs/modl2d)
+Example config files for different experiments from the paper are in [configs/GLEAM-configs](https://github.com/batuozt/GLEAM/tree/master/configs/GLEAM-configs)
 
 ## Weights and Biases
-Our repository uses Weights and Biases (W&B) for experiment visualization. To use W&B with your entity and project name, you can modify the defaults for these at [ss_recon/config/defaults.py](https://github.com/batuozt/GLEAM/ss_recon/config/defaults.py)
+Our repository uses Weights and Biases (W&B) for experiment visualization. To use W&B with your entity and project name, you can modify the defaults for these at [ss_recon/config/defaults.py](https://github.com/batuozt/GLEAM/blob/master/ss_recon/config/defaults.py)
 
 ## Datasets
 
-Files to format and use publicly available datasets mridata.org and fastMRI are available in the [datasets](https://github.com/batuozt/GLEAM/datasets) folder.
+Files to format and use publicly available datasets mridata.org and fastMRI are available in the [datasets](https://github.com/batuozt/GLEAM/tree/master/datasets) folder.
 
 ## Acknowledgements
 The code for GLEAM was developed concurrently with [Meddlr](https://github.com/ad12/meddlr). Meddlr's and GLEAM's design are inspired by [detectron2](https://github.com/facebookresearch/detectron2).
 
-Our implementation of decoupled greedy learning for unrolled neural networks was inspired by [https://arxiv.org/abs/1901.08164 (DGL)](https://github.com/eugenium/DGL).
+Our implementation of decoupled greedy learning for unrolled neural networks was inspired by code for [https://arxiv.org/abs/1901.08164](https://arxiv.org/abs/1901.08164) at [https://github.com/eugenium/DGL)](https://github.com/eugenium/DGL).
 
 For baseline comparisons with gradient checkpointing and memory-efficient learning, we used the open source implementation [https://github.com/mikgroup/MEL_MRI](https://github.com/mikgroup/MEL_MRI).
 
